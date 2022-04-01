@@ -1,0 +1,24 @@
+before_script:
+  - npm install
+
+stages:
+  - lint-test
+  - ui-test
+
+lint-test-job:   
+  stage: lint-test  
+  only:
+    - branches
+  tags:
+    - ks_win
+  script:
+    - npm run lint
+
+ui-test-job:
+  stage: ui-test
+  only:
+    - master
+  tags:
+    - ks_win
+  script:
+    - npm run wdio -- --headless --browser chrome
